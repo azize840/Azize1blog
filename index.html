@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Accueil - Blog des Étudiants</title>
+
+  <!-- Liens des styles CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- GSAP pour les animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts pour une typographie moderne -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Styles globaux */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: rgba(18, 65, 219, 0.7);
+      padding: 10px 0;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: auto;
+    }
+    
+    header .logo img {
+      max-width: 100px;
+    }
+    
+    header h1.animated-text {
+      font-size: 1.5rem;
+      margin: 5px 0;
+    }
+    
+    header p {
+      font-size: 0.9rem;
+      margin: 5px 0;
+    }
+    
+    header nav ul {
+      gap: 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color:rgb(235, 22, 75);
+    }
+
+    .section {
+      padding: 100px 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color:rgb(36, 33, 33);
+    }
+
+    .student-grid, .project-list, .testimonial-grid, .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .student, .project, .testimonial, .stat {
+      background: rgba(204, 203, 226, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .student:hover, .project:hover, .testimonial:hover, .stat:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(48, 45, 45, 0.3);
+    }
+
+    .student img, .testimonial img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    .quote-scroller p {
+      display: inline-block;
+      white-space: nowrap;
+      padding-left: 100%; /* Commence en dehors de la vue */
+      animation: scrolling 20s linear infinite; /* Défilement fluide */
+      font-style: italic;
+      color: #555;
+  }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background:rgb(219, 82, 19);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #0097a7;
+    }
+
+    .parallax {
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00bcd4;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 50%;
+      text-decoration: none;
+      display: none;
+      z-index: 1000;
+    }
+
+    .back-to-top:hover {
+      background: #0097a7;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .social-links a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #00bcd4;
+    }
+
+    .categories ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+  
+    .categories ul li {
+      flex: 1 1 200px;
+      max-width: 250px;
+    }
+  
+    .category-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(18, 134, 24, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+  
+    .category-link:hover {
+      background: rgba(230, 12, 12, 0.2);
+      color: #00bcd4;
+    }
+  
+    .category-icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      color: #00bcd4;
+    }
+  
+    .category-text {
+      font-size: 1.1rem;
+    }
+  
+    .categories ul li:nth-child(1) .category-link:hover {
+      color: rgb(202, 97, 36);
+    }
+  
+    .categories ul li:nth-child(2) .category-link:hover {
+      color: rgb(221, 122, 29);
+    }
+  
+    .categories ul li:nth-child(3) .category-link:hover {
+      color: rgb(211, 102, 39);
+    }
+  
+    .categories ul li:nth-child(4) .category-link:hover {
+      color: rgb(224, 109, 32);
+    }
+
+    #contact form {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    #contact label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+    }
+
+    #contact input,
+    #contact textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background: rgba(53, 65, 179, 0.8);
+      color: #000;
+    }
+
+    #contact textarea {
+      resize: vertical;
+    }
+    
+    #contact button {
+      background: #00bcd4;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #contact button:hover {
+      background: #0097a7;
+    }
+    #about {
+      background-image: url('images/a.jpg');
+    }
+    #students {
+      background-image: url('images/background-students.jpg');
+    
+    }
+    <section id="about" class="section parallax" style="background-image: url('images/about-bg.jpg');">
+    #projects {
+      background-image: url('images/projeet.jpg');
+    }
+    #testimonials {
+      background-image: url('images/temoi.jpg');
+    }
+    #contact {
+      background-image: url('images/background-contact.jpg');
+    }
+
+    
+
+    
+
+  </style>
+</head>
+<body>
+
+  <!-- En-tête de la page -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo du Blog des Étudiants" style="max-width: 50px;">
+      </div>
+      <p>Découvrez les talents, les projets, et les parcours inspirants de nos étudiants.</p>
+      <nav>
+        <ul>
+          <li><a href="#about"><i class="fas fa-info-circle"></i> À propos</a></li>
+          <li><a href="#students"><i class="fas fa-users"></i> Étudiants</a></li>
+          <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projets</a></li>
+          <li><a href="#testimonials"><i class="fas fa-comments"></i> Témoignages</a></li>
+          <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main>
+   
+    <!-- Section À propos -->
+<section id="about" class="section parallax" style="background-image: url('images/about-bg.jpg');">
+  <div class="container">
+    <h2 style="color: black;">À propos de nous</h2>
+    <p style="color: black;">
+      Le Blog des Étudiants est une plateforme dédiée à la mise en avant des talents et des projets innovants des étudiants.
+      Notre mission est de créer une communauté inspirante et collaborative.
+  </p>
+  
+  </div>
+</section>
+    <!-- Section Étudiants -->
+    <section id="students" class="section">
+      <div class="container">
+        <h2>Étudiants</h2>
+        <div class="student-grid">
+          <!-- Carte Étudiant 1 -->
+          <div class="student">
+            <img src="images/student1.jpg" alt="Photo de Étudiant 1">
+            <h3>Étudiant 1</h3>
+            <p>Domaine : Informatique</p>
+            <a href="student1.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Répétez pour les autres étudiants -->
+          <!-- Carte Étudiant 2 -->
+          <div class="student">
+            <img src="images/student2.jpg" alt="Photo de Étudiant 2">
+            <h3>Étudiant 2</h3>
+            <p>Domaine : Informatique</p>
+            <a href="student2.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 3 -->
+          <div class="student">
+            <img src="images/student3.jpg" alt="Photo de Étudiant 3">
+            <h3>Étudiant 3</h3>
+            <p>Domaine : Ingenierie</p>
+            <a href="student3.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 4 -->
+          <div class="student">
+            <img src="images/student4.jpg" alt="Photo de Étudiant 4">
+            <h3>Étudiant 4</h3>
+            <p>Domaine : Ingenierie</p>
+            <a href="student4.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 5 -->
+          <div class="student">
+            <img src="images/student5.jpg" alt="Photo de Étudiant 5">
+            <h3>Étudiant 5</h3>
+            <p>Domaine : Mathematique</p>
+            <a href="student5.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 6 -->
+          <div class="student">
+            <img src="images/student6.jpg" alt="Photo de Étudiant 6">
+            <h3>Étudiant 6</h3>
+            <p>Domaine : Mathematique</p>
+            <a href="student6.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 7 -->
+          <div class="student">
+            <img src="images/student7.jpg" alt="Photo de Étudiant 7">
+            <h3>Étudiant 7</h3>
+            <p>Domaine : Medecine</p>
+            <a href="student7.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 8 -->
+          <div class="student">
+            <img src="images/student8.jpg" alt="Photo de Étudiant 8">
+            <h3>Étudiant 8</h3>
+            <p>Domaine : Medecine</p>
+            <a href="student8.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 9 -->
+          <div class="student">
+            <img src="images/student9.jpg" alt="Photo de Étudiant 9">
+            <h3>Étudiant 9</h3>
+            <p>Domaine : Droit</p>
+            <a href="student9.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 10 -->
+          <div class="student">
+            <img src="images/student10.jpg" alt="Photo de Étudiant 10">
+            <h3>Étudiant 10</h3>
+            <p>Domaine : Droit</p>
+            <a href="student10.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 11 -->
+          <div class="student">
+            <img src="images/student11.jpg" alt="Photo de Étudiant 11">
+            <h3>Étudiant 11</h3>
+            <p>Domaine : physique</p>
+            <a href="student11.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 12 -->
+          <div class="student">
+            <img src="images/student12.jpg" alt="Photo de Étudiant 12">
+            <h3>Étudiant 12</h3>
+            <p>Domaine : physique</p>
+            <a href="student12.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 13 -->
+          <div class="student">
+            <img src="images/student13.jpg" alt="Photo de Étudiant 13">
+            <h3>Étudiant 13</h3>
+            <p>Domaine : economie</p>
+            <a href="student13.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+          <!-- Carte Étudiant 14 -->
+          <div class="student">
+            <img src="images/student14.jpg" alt="Photo de Étudiant 14">
+            <h3>Étudiant 14</h3>
+            <p>Domaine : economie</p>
+            <a href="student14.html" class="btn"><i class="fas fa-user"></i> Voir Profil</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Projets -->
+    <section id="projects" class="section parallax" style="background-image: url('images/projects-bg.jpg');">
+      <div class="container">
+        <h2>Projets Récents</h2>
+        <div class="project-list">
+          <div class="project">
+            <h3 style="color: black;">Projet 1 : Application de gestion</h3>
+            <p style="color: black;">Un outil pour simplifier les tâches quotidiennes des utilisateurs.</p>
+            <h3 style="color: black;">Projet 2 : Robot suiveur de ligne</h3>
+            <p style="color: black;">Un outil pour simplifier les tâches quotidiennes des utilisateurs.</p>
+            <h3 style="color: black;">Projet 3 : Modélisation de systèmes dynamiques</h3>
+            <p style="color: black;">Un outil pour simplifier les tâches quotidiennes des utilisateurs.</p>
+            <h3 style="color: black;">Projet 4 : Analyse des séries temporelles et les prévisions avec Python</h3>
+            <p style="color: black;">Un outil pour simplifier les tâches quotidiennes des utilisateurs.</p>
+            <h3 style="color: black;">Projet 5 : Modélisation 3D d'un bâtiment</h3>
+            <p style="color: black;">Un outil pour simplifier les tâches quotidiennes des utilisateurs.</p>
+          </div>
+          <!-- Répétez pour les autres projets -->
+        </div>
+      </div>
+    </section>
+<!-- Section Témoignages -->
+<section id="testimonials" class="section">
+  <div class="container">
+    <h2>Témoignages</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <img src="images/testimonial1.jpg" alt="Photo de Témoin 1">
+        <h3>Jean Sawadogo</h3>
+        <p>"Ce blog m'a permis de découvrir des opportunités incroyables !"</p>
+      </div>
+      <div class="testimonial">
+        <img src="images/testimonial2.jpg" alt="Photo de Témoin 2">
+        <h3>Ousseni Ouedraogo</h3>
+        <p>"Ce blog est tellement inspirant whouhhh!"</p>
+      </div>
+      <div class="testimonial">
+        <img src="images/testimonial3.jpg" alt="Photo de Témoin 3">
+        <h3>Ilboudo Victorine</h3>
+        <p>"Ce blog m'a permis de découvrir des opportunités incroyables !"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .testimonial {
+    flex: 1;
+    min-width: 300px;
+    max-width: 30%;
+    text-align: center;
+    background: #333;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .testimonial img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  .testimonial h3, .testimonial p {
+    color: yellow;
+  }
+</style>
+
+    
+          <!-- Répétez pour les autres témoignages -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Statistiques -->
+    <section id="stats" class="section">
+      <div class="container">
+        <h2>Nos chiffres clés</h2>
+        <div class="stats-grid">
+          <div class="stat">
+            <h3 style="color: black;">10+</h3>
+            <p style="color: black;">Étudiants inscrits</p>
+          </div>
+          <div class="stat">
+            <h3 style="color: black;">100+</h3>
+            <p style="color: black;">Projets réalisés</p>
+          </div>
+          <div class="stat">
+            <h3 style="color: black;">95%</h3>
+            <p style="color: black;">Satisfaction</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Articles populaires -->
+<section class="highlight">
+  <h2>Articles populaires</h2>
+  <div class="article">
+    <h3 id="title1">5 astuces pour bien préparer ses examens</h3>
+    <p id="text1">Découvrez des stratégies simples et efficaces pour exceller pendant vos examens.</p>
+    <a href="article1.html">Lire la suite</a>
+  </div>
+  <div class="article">
+    <h3 id="title2">Comment gérer son stress étudiant ?</h3>
+    <p id="text2">Apprenez à garder votre calme et à rester motivé.</p>
+    <a href="article2.html">Lire la suite</a>
+  </div>
+  <button onclick="changeTextColor()">Changer la couleur des textes</button>
+</section>
+
+<script>
+  // Liste de couleurs disponibles
+  const colors = ["red", "blue", "green", "purple", "orange", "black", "pink", "teal"];
+
+  // Fonction pour changer la couleur des textes
+  function changeTextColor() {
+    // Sélectionner les éléments à modifier
+    const title1 = document.getElementById("title1");
+    const text1 = document.getElementById("text1");
+    const title2 = document.getElementById("title2");
+    const text2 = document.getElementById("text2");
+
+    // Choisir une couleur aléatoire dans la liste
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+    // Appliquer la nouvelle couleur aux éléments
+    title1.style.color = randomColor;
+    text1.style.color = randomColor;
+    title2.style.color = randomColor;
+    text2.style.color = randomColor;
+  }
+</script>
+
+    <!-- Section Catégories -->
+    <section class="categories">
+      <h2>Explorez les catégories</h2>
+      <ul>
+        <li>
+          <a href="category1.html" class="category-link">
+            <i class="fas fa-book category-icon"></i>
+            <span class="category-text">Méthodes d'étude</span>
+          </a>
+        </li>
+        <li>
+          <a href="category2.html" class="category-link">
+            <i class="fas fa-clock category-icon"></i>
+            <span class="category-text">Gestion du temps</span>
+          </a>
+        </li>
+        <li>
+          <a href="category3.html" class="category-link">
+            <i class="fas fa-heart category-icon"></i>
+            <span class="category-text">Motivation & bien-être</span>
+          </a>
+        </li>
+        <li>
+          <a href="category4.html" class="category-link">
+            <i class="fas fa-briefcase category-icon"></i>
+            <span class="category-text">Opportunités</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Inscription</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+      <style>
+          #confirmation-message {
+              display: none; /* Caché par défaut */
+              color: green;
+              margin-top: 20px;
+              font-weight: bold;
+          }
+      </style>
+  </head>
+  <body class="container mt-5">
+      <h1>Formulaire d'inscription</h1>
+  
+      <!-- La phrase visible -->
+      <p>Numéro WhatsApp : Ce champ est requis pour finaliser votre inscription.</p>
+  
+      <!-- Le formulaire -->
+      <form id="inscriptionForm" action="https://formspree.io/f/mgvaebpa" method="POST">
+          <div class="mb-3">
+              <label for="Numero" class="form-label">Numéro WhatsApp :</label>
+              <input type="text" id="Numero" name="Numero" class="form-control" 
+                     pattern="[0-9]+" title="Veuillez entrer uniquement des chiffres" required>
+          </div>
+          <div class="mb-3">
+              <label for="email" class="form-label">Votre Email :</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Votre email" required>
+          </div>
+          <button type="submit" class="btn btn-primary">S'inscrire maintenant</button>
+      </form>
+  
+      <!-- Message de confirmation -->
+      <p id="confirmation-message">Merci pour votre inscription ! Nous vous contacterons bientôt.</p>
+  
+      <script>
+          document.getElementById("inscriptionForm").addEventListener("submit", function(event) {
+              event.preventDefault(); // Empêche le rechargement de la page
+              // Affiche le message de confirmation
+              document.getElementById("confirmation-message").style.display = "block";
+          });
+      </script>
+  </body>
+    
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="section">
+      <h2>Contactez-Nous</h2>
+      <form action="https://formspree.io/f/mgvaebpa" method="POST">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Adresse e-mail :</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message :</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Envoyer</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Bouton Retour en haut -->
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+  <div class="quote-scroller">
+    <p>"Le succès, c’est d’aller d’échec en échec sans perdre son enthousiasme." – Winston Churchill</p>
+
+</div>
+  <!-- Pied de page -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Blog des Étudiants. Tous droits réservés.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script JS pour animations et transitions -->
+  <script>
+    // GSAP Animations
+    gsap.from(".animated-text", { opacity: 0, y: -50, duration: 1, delay: 0.5 });
+    gsap.from(".student, .project, .testimonial, .stat", {
+      opacity: 0,
+      y: 50,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: ".section",
+        start: "top 80%",
+      },
+    });
+
+    // Bouton Retour en haut
+    const backToTop = document.querySelector(".back-to-top");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = "block";
+      } else {
+        backToTop.style.display = "none";
+      }
+    });
+
+    // Gestion du formulaire de contact
+    document.addEventListener('DOMContentLoaded', function () {
+      const contactForm = document.querySelector('#contact form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+          })
+          .then((response) => {
+            if (response.ok) {
+              contactForm.innerHTML = '<p>Votre message a été envoyé. Merci de nous avoir contactés !</p>';
+            } else {
+              contactForm.innerHTML = '<p>Une erreur est survenue. Veuillez réessayer.</p>';
+            }
+          })
+          .catch((error) => {
+            console.error('Erreur lors de l\'envoi du formulaire :', error);
+            contactForm.innerHTML = '<p>Une erreur est survenue. Veuillez réessayer.</p>';
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
