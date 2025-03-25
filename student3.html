@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil de Étudiant 3</title>
+  <!-- Lien vers le fichier CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Google Fonts pour des polices modernes -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600|Roboto:400,500&display=swap" rel="stylesheet">
+  <!-- Lien vers Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Styles globaux */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('images/archi.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    nav ul li a:hover {
+      color: #00bcd4;
+    }
+
+    .section {
+      background: rgba(0, 0, 0, 0.7);
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .about-content {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .bio {
+      flex: 1;
+    }
+
+    .bio p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-list li {
+      margin-bottom: 10px;
+    }
+
+    .info-list li i {
+      margin-right: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #00bcd4;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #0097a7;
+    }
+
+    .about-images {
+      display: flex;
+      gap: 20px;
+    }
+
+    .profile-pic img,
+    .domain-image img {
+      border-radius: 10px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .projects-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .projects-list li {
+      margin-bottom: 15px;
+    }
+
+    .projects-list li i {
+      margin-right: 10px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background: rgba(255, 255, 255, 0.8);
+      color: #000;
+    }
+
+    form button {
+      background: #00bcd4;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: #0097a7;
+    }
+
+    .confirmation-message {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      display: none;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 20px;
+    }
+
+    footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- En-tête -->
+  <header>
+    <div class="container">
+      <h1>Profil de Étudiant 3</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+          <li><a href="#about"><i class="fas fa-user"></i> À propos</a></li>
+          <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projets</a></li>
+          <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="container">
+    <!-- Section À propos -->
+    <section id="about" class="section">
+      <h2><i class="fas fa-user"></i> À propos de moi</h2>
+      <div class="about-content">
+        <div class="bio">
+          <p>
+            Bonjour ! Je suis Kaboré Benjamen, actuellement étudiant en Ingénierie Bâtiment. Passionné par la Conception et architecture et l'Innovation et technologies du bâtiment, j’ai toujours cherché à innover dans chaque projet. Grâce à ma formation à l’Université d'Harvard, j’ai acquis une solide expertise en Ingénierie Bâtiment.
+          </p>
+          <ul class="info-list">
+            <li><i class="fas fa-graduation-cap"></i> <strong>Formation :</strong> Licence en Ingénierie Bâtiment, Université d'Harvard</li>
+            <li><i class="fas fa-code"></i> <strong>Compétences :</strong> Conception et planification, Technologies du bâtiment</li>
+            <li><i class="fas fa-heart"></i> <strong>Intérêts :</strong> Architecture et design, Innovation technologique</li>
+            <li><i class="fas fa-map-marker-alt"></i> <strong>Localisation :</strong> Los Angeles, USA</li>
+          </ul>
+          <!-- Lien vers un CV ou portfolio -->
+          <a href="cv/arch1.pdf" class="btn"><i class="fas fa-download"></i> Télécharger mon CV</a>
+        </div>
+        <div class="about-images">
+          <div class="profile-pic">
+            <!-- Photo de profil de l'étudiant -->
+            <img src="images/student3.jpg" alt="Photo de Kaboré Benjamen">
+          </div>
+          <div class="domain-image">
+            <!-- Image représentant son domaine (par ex. un univers high-tech/informatique) -->
+            <img src="images/informatique3.jpg" alt="Représentation du domaine Ingénierie Bâtiment">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Réalisations -->
+    <section id="projects" class="section">
+      <h2><i class="fas fa-project-diagram"></i> Mes Réalisations</h2>
+      <ul class="projects-list">
+        <li>
+          <i class="fas fa-robot"></i> <strong>Conception d'un bâtiment résidentiel :</strong> Conception d'un bâtiment résidentiel. <a href="projects/app-gestion.html"></a>
+        </li>
+        <li>
+          <i class="fas fa-chart-line"></i> <strong>Modélisation 3D d'un bâtiment :</strong> Un projet de modélisation 3D d'un bâtiment. <a href="projects/site-bibliotheque.html"></a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="section">
+      <h2><i class="fas fa-envelope"></i> Contactez-moi</h2>
+      <form id="contactForm" action="https://formspree.io/f/mgvaebpa" method="POST">
+        <label for="name"><i class="fas fa-user"></i> Nom :</label>
+        <input type="text" id="name" name="name" placeholder="Votre nom" required>
+
+        <label for="email"><i class="fas fa-envelope"></i> Adresse e-mail :</label>
+        <input type="email" id="email" name="email" placeholder="Votre email" required>
+
+        <label for="message"><i class="fas fa-comment"></i> Message :</label>
+        <textarea id="message" name="message" placeholder="Votre message" rows="5" required></textarea>
+
+        <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Envoyer</button>
+      </form>
+      <!-- Zone réservée à l'affichage du message de confirmation -->
+      <div id="confirmationMessage" class="confirmation-message"></div>
+    </section>
+  </main>
+
+  <!-- Pied de page -->
+  <footer>
+    <p>&copy; 2025 Blog des Étudiants. Tous droits réservés.</p>
+  </footer>
+
+  <!-- Script pour gérer l'envoi du formulaire et afficher un message -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const contactForm = document.getElementById('contactForm');
+      const confirmationMessage = document.getElementById('confirmationMessage');
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          
+          fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+          })
+          .then((response) => {
+            if (response.ok) {
+              confirmationMessage.textContent = 'Votre message a été envoyé. Merci de m\'avoir contacté !';
+              confirmationMessage.style.display = 'block';
+              confirmationMessage.style.color = 'green';
+              contactForm.reset();
+            } else {
+              confirmationMessage.textContent = 'Une erreur est survenue. Veuillez réessayer.';
+              confirmationMessage.style.display = 'block';
+              confirmationMessage.style.color = 'red';
+            }
+          })
+          .catch((error) => {
+            console.error('Erreur lors de l’envoi du formulaire :', error);
+            confirmationMessage.textContent = 'Une erreur est survenue. Veuillez réessayer.';
+            confirmationMessage.style.display = 'block';
+            confirmationMessage.style.color = 'red';
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
